@@ -1,0 +1,37 @@
+{
+  "language": "Kieli",
+  "WelcomePage": {
+    "Sliders": {
+      "popular": "Popular",
+      "discounts": "Discounts"
+    },
+    "Filter": {
+      "Categories": [
+        {
+          "title": "Material",
+          "options": ["Wool", "Cotton", "Linen", "Cashmere", "Mohair", "Mixed"]
+        },
+        {
+          "title": "Thickness",
+          "options": ["Lace", "Fingering", "Sport", "Worsted", "Bulky"]
+        },
+        {
+          "title": "Purpose",
+          "options": ["Hand Knitting", "Machine Knitting", "Clothing", "Accessories"]
+        },
+        {
+          "title": "Shade",
+          "options": ["Solid", "Melange", "Gradient", "Sectional Dyeing"]
+        },
+        {
+          "title": "Type",
+          "options": ["Classic", "Boucle", "Novelty"]
+        },
+        {
+          "title": "Seasonality",
+          "options": ["Winter", "Summer", "All-Season"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "language": "Kieli",
+  "WelcomePage": {
+    "Sliders": {
+      "popular": "Suosittuimmat",
+      "discounts": "Alennuksessa"
+    },
+    "Filter": {
+      "Categories": [
+        {
+          "title": "Materiaalikoostumus",
+          "options": ["Villa", "Puuvilla", "Pellava", "Kashmir", "Mohair", "Sekoitteet"]
+        },
+        {
+          "title": "Langantiheys",
+          "options": ["Pitsilanka", "Ohut", "Keski", "Paksu", "Erittäin paksu"]
+        },
+        {
+          "title": "Käyttötarkoitus",
+          "options": ["Käsineulonta", "Koneellinen neulonta", "Vaatteet", "Asusteet"]
+        },
+        {
+          "title": "Sävy",
+          "options": ["Yksivärinen", "Melange", "Liukuvärjätty", "Osavärjätty"]
+        },
+        {
+          "title": "Langan tyyppi",
+          "options": ["Klassinen", "Bouclé", "Muotoiltu"]
+        },
+        {
+          "title": "Kausittaisuus",
+          "options": ["Talvi", "Kesä", "Kauden mukainen"]
+        }
+      ]
+    }
+  }
+}
