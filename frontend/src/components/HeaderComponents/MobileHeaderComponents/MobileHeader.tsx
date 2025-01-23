@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5px;
+
   padding-bottom: 15px;
   margin-bottom: 20px;
   border-radius: 0 0 20px 20px;
@@ -27,7 +27,7 @@ const HeaderTop = styled.div`
   height: 100%;
   width: 80%;
   max-width: 1000px;
-  height: 50px;
+  height: 60px;
 
   border-bottom: solid 2px;
   border-color: ${({ theme }) => theme.appBgColor};
@@ -68,37 +68,12 @@ const LanguageChange = styled.div`
   width: 10px;
 `;
 
-const Icon = styled.span`
-  font-family: 'Material Symbols Outlined';
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 250,
-  'GRAD' 200,
-  'opsz' 48;
-  font-size: 30px;
-
-  cursor: pointer;
-
-  &:active {
-    color: red;
-  }
-`;
-
 const DesktopHeader = () => {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  const toggleFilter = () => {
-    setIsFilterOpen(prev => !prev);
-  };
-
   return (
     <>
       <StyledHeader>
         <HeaderTop>
-          <HeaderLeft onClick={toggleFilter}>
-            <Icon>
-              menu
-            </Icon>
+          <HeaderLeft>
           </HeaderLeft>
           <HeaderCenter>
             <p>LankaVarasto</p>
@@ -113,9 +88,7 @@ const DesktopHeader = () => {
           <SearchField />
         </HeaderBottom>
       </StyledHeader>
-      
-      {/* Pass the state and toggle function to CheckboxFilter */}
-      <CheckboxFilter isOpen={isFilterOpen} toggleFilter={toggleFilter} />
+
     </>
   );
 };

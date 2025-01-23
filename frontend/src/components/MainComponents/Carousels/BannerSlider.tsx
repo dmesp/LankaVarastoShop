@@ -43,9 +43,8 @@ const SlideContent = styled.div`
 
 `;
 
-const Base = styled.div`
+const CarouselContainer = styled.div`
   width: 100%;
-  
   max-width: 800px;
   overflow: hidden;
   border-radius: 30px;
@@ -69,28 +68,28 @@ const slidesData = [
 
 const BannerSlider = () => {
   return (
-    <Base>
-    <Carousel
-      responsive={responsive}
-      autoPlay={true}
-      autoPlaySpeed={9000}
-      infinite={true}
-      showDots={false}
-      arrows={false}
-      additionalTransfrom={0}
-      transitionDuration={300}
-      customTransition={"transform 300ms ease-in-out"}
-    >
-      {slidesData.map(slide => (
-          <Slide key={slide.id} bgColor={slide.bgColor}>
-          <SlideImage src={slide.imgLink} alt={slide.content} />
-          <SlideContent>
-            
-          </SlideContent>
-        </Slide>
-      ))}
-    </Carousel>
-    </Base>
+    <CarouselContainer>
+      <Carousel
+        responsive={responsive}
+        autoPlay={true}
+        autoPlaySpeed={9000}
+        infinite={true}
+        showDots={false}
+        arrows={false}
+        additionalTransfrom={0}
+        transitionDuration={300}
+        customTransition={"transform 300ms ease-in-out"}
+      >
+        {slidesData.map(slide => (
+            <Slide key={slide.id} bgColor={slide.bgColor}>
+            <SlideImage src={slide.imgLink} alt={slide.content} />
+            <SlideContent>
+              
+            </SlideContent>
+          </Slide>
+        ))}
+      </Carousel>
+    </CarouselContainer>
   );
 }
 

@@ -24,11 +24,9 @@ const HeaderTop = styled.div`
   width: 100%;
   max-width: 1500px;
   padding: 5px 20px;
-  font-size: 30px;
 
-  @media (max-width: 950px) {
-    font-size: 25px;
-  }
+
+
 `;
 
 const HeaderLeft = styled.div`

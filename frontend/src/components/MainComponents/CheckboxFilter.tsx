@@ -20,13 +20,20 @@ interface Translations {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px;
 
-  border-radius: 0px 30px 30px 0px;
-  gap: 40px;
+  padding: 20px;
+  border-radius: 30px;
+  gap: 25px;
   border: solid 2px;
-  border-left: none;
+
   border-color: ${({ theme }) => theme.appBgColor};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.wideScreen}) {
+    border-radius:  0px 30px 30px 0px;
+    gap: 40px;
+    padding: 30px;
+    border-left: none;
+  }
 `;
 
 const Category = styled.div``;
@@ -39,7 +46,7 @@ const Title = styled.div`
 
 const Options = styled.div`
   margin-left: 10px;
-  margin-top: 5px;
+
 `;
 
 const Label = styled.label`
@@ -91,11 +98,11 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 16px;
   width: 100%;
-  height: 50px;
-  border-radius: 20px;
-  border: solid 2px;
+  height: 40px;
+  border-radius: 15px;
+
   border-color: ${({ theme }) => theme.appBgColor};
   background: ${({ theme }) => theme.appBgColor70};
 

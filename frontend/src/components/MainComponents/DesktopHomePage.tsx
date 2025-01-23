@@ -4,8 +4,7 @@ import styled from "styled-components";
 import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
-import CheckboxFilter from './CheckboxFilter'; // Импорт компонента фильтров
-
+import CheckboxFilter from './CheckboxFilter'; 
 const StyledWelcome = styled.div`
   display: flex;
   width: 100%;
@@ -13,7 +12,7 @@ const StyledWelcome = styled.div`
   height: fit-content;
 `;
 
-const WelcomeContent = styled.div`
+const MainPage = styled.div`
   height: fit-content;
   display: grid;
   grid-template-columns: 400px 1fr 1fr; 
@@ -31,16 +30,15 @@ const FilterWrapper = styled.div`
   z-index: 10;
 `;
 
-const SliderWrapper = styled.div`
+const BannerWrapper = styled.div`
   grid-area: banners;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  width: 100%;
 `;
 
-const FullWidthSlider = styled.div`
+const ProdusctSliders = styled.div`
   grid-area: slider;
   display: flex;
   flex-direction: column;
@@ -51,22 +49,18 @@ const FullWidthSlider = styled.div`
 const DesktopHomePage = () => {
   return (
     <StyledWelcome>
-      <WelcomeContent>
-        {/* Левая колонка с фильтрами */}
+      <MainPage>
         <FilterWrapper>
           <CheckboxFilter />
         </FilterWrapper>
-
-        {/* Центральные слайдеры */}
-        <SliderWrapper>
+        <BannerWrapper>
           <BannerSlider />
-        </SliderWrapper>
-
-        <FullWidthSlider>
+        </BannerWrapper>
+        <ProdusctSliders>
           <PopoularSlider />
           <DiscountSlider />
-        </FullWidthSlider>
-      </WelcomeContent>
+        </ProdusctSliders>
+      </MainPage>
     </StyledWelcome>
   );
 };
