@@ -8,7 +8,6 @@ const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding: 20px;
   background: ${({ theme }) => theme.appBgColor};
   width: 100%;
   height: fit-content;

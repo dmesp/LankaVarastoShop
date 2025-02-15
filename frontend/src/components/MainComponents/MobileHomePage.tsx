@@ -4,45 +4,47 @@ import styled from "styled-components";
 import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
-import CheckboxFilter from '../HeaderComponents/MobileHeaderComponents/CheckBoxFilters'; // Импорт компонента фильтров
+import CheckboxFilter from '../HeaderComponents/MobileHeaderComponents/CheckBoxFilters'; 
 
 const StyledWelcome = styled.div`
   display: flex;
-  width: 100%;
-  min-height: 100vh; /* Adjusted for flexible height */
-  flex-direction: column; /* Stack content vertically */
+  width: 100vw;
+  min-height: 100vh; 
+  flex-direction: column; 
 `;
 
-const WelcomeContent = styled.div`
+const MainPage = styled.div`
   width: 100%;
 `;
 
-const SliderWrapper = styled.div`
+const BannerWrapper = styled.div`
+  grid-area: banners;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  grid-area: banners;
+  margin-bottom: 20px;
 `;
 
-const FullWidthSlider = styled.div`
-
+const ProductsSliders = styled.div`
   grid-area: slider;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
 `;
 
 const MobileHomePage = () => {
   return (
     <StyledWelcome>
-      <WelcomeContent>
-        <SliderWrapper>
+      <MainPage>
+        <BannerWrapper>
           <BannerSlider />
-        </SliderWrapper>
-
-        <FullWidthSlider>
+        </BannerWrapper>
+        <ProductsSliders>
           <PopoularSlider />
           <DiscountSlider />
-        </FullWidthSlider>
-      </WelcomeContent>
+        </ProductsSliders>
+      </MainPage>
     </StyledWelcome>
   );
 };

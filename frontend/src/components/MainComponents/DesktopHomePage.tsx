@@ -5,6 +5,7 @@ import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
 import CheckboxFilter from './CheckboxFilter'; 
+
 const StyledWelcome = styled.div`
   display: flex;
   width: 100%;
@@ -35,15 +36,15 @@ const BannerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 `;
 
-const ProdusctSliders = styled.div`
+const ProductsSliders = styled.div`
   grid-area: slider;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
-  width: 100%;
+  column-gap: 40px;
+
 `;
 
 const DesktopHomePage = () => {
@@ -56,10 +57,10 @@ const DesktopHomePage = () => {
         <BannerWrapper>
           <BannerSlider />
         </BannerWrapper>
-        <ProdusctSliders>
+        <ProductsSliders>
           <PopoularSlider />
           <DiscountSlider />
-        </ProdusctSliders>
+        </ProductsSliders>
       </MainPage>
     </StyledWelcome>
   );

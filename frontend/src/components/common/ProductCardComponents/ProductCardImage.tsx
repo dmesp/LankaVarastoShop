@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useLikeToggle } from "@/hooks/useLikeToggler"; // Импортируем хук
 
 // Стили для компонента
 const ProductImageWrapper = styled.div`
@@ -23,13 +24,56 @@ const HeartIconContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 5px;
+  right: 5px;
   border-radius: 50%;
-  height: 32px;
-  width: 32px;
+  height: 35px;
+  width: 35px;
   background-color: rgba(255, 255, 255, 0.34);
   cursor: pointer;
+
+  z-index: 2;
+  pointer-events: auto;
+`;
+
+const HeartIcon = styled.span`
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 250, 'GRAD' 200, 'opsz' 50;
+  font-size: 30px;
+  cursor: pointer;
+
+  transition: all 0.08s ease-in-out;
+
+  &:hover {
+    color: red;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileScreen}) {
+  &:hover {
+    color: black;
+    transform: scale(1.05);
+  }
+  }
+`;
+
+const ActiveHeartIcon = styled.span`
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 1, 'wght' 250, 'GRAD' 200, 'opsz' 50;
+  font-size: 30px;
+  cursor: pointer;
+  color: red;
+
+  transition: all 0.08s linear;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
 `;
 
 const DiscountPercent = styled.div`
@@ -47,37 +91,34 @@ const DiscountPercent = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
-const HeartIcon = styled.span`
-  font-family: 'Material Symbols Outlined';
-  font-variation-settings: 'FILL' 0, 'wght' 250, 'GRAD' 200, 'opsz' 48;
-  font-size: 28px;
-  cursor: pointer;
-
-  &:active {
-    color: red;
-  }
-`;
-
-// Пропсы компонента
-interface ProductImageWrapperProps {
-  imglink: string;
+type ProductImageWrapperProps = {
+  id: number;
   title: string;
+  imageUrl: string;
   onDiscount: boolean;
+  setDisableParentActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// Компонент
-const ProductCardImage: React.FC<ProductImageWrapperProps> = ({
-  imglink,
-  title,
-  onDiscount,
-}) => (
-  <ProductImageWrapper>
-    <ProductImage src={imglink} alt={title} />
-    {onDiscount && <DiscountPercent>-20%</DiscountPercent>}
-    <HeartIconContainer>
-      <HeartIcon>favorite</HeartIcon>
-    </HeartIconContainer>
-  </ProductImageWrapper>
-);
+const ProductCardImage = ({ id, title, imageUrl, onDiscount, setDisableParentActive }: ProductImageWrapperProps) => {
+  const { likedProducts, handleLikeToggle } = useLikeToggle();
+  console.log(likedProducts)
+  return (
+    <ProductImageWrapper>
+      <ProductImage src={imageUrl} alt={title} />
+      {onDiscount && <DiscountPercent>-20%</DiscountPercent>}
+      <HeartIconContainer 
+        onClick={() => handleLikeToggle(id)}
+        onMouseEnter={() => setDisableParentActive(true)}
+        onMouseLeave={() => setDisableParentActive(false)}
+        >
+        {likedProducts.includes(id) ? (
+          <ActiveHeartIcon>favorite</ActiveHeartIcon>
+        ) : (
+          <HeartIcon>favorite</HeartIcon>
+        )}
+      </HeartIconContainer>
+    </ProductImageWrapper>
+  );
+};
 
 export default ProductCardImage;

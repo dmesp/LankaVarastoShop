@@ -14,6 +14,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0px;
     border: 0px;
     outline: 0px;
+    max-width: 100vw;
     overflow-x: hidden;
     touch-action: pan-y;
     box-sizing: border-box;
@@ -24,7 +25,6 @@ export const GlobalStyles = createGlobalStyle`
 		font-family: 'Lora', serif;
     font-style: normal;
     font-size: 18px;
-    
   }
 
    h1 {

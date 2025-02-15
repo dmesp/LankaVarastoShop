@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductCardImage from './ProductCardImage';
 
-const ProductWrapper = styled.div`
+const ProductWrapper = styled.div<{ disableActive: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -13,12 +13,54 @@ const ProductWrapper = styled.div`
   background: ${({ theme }) => theme.appBgColor50};
   border-radius: 30px;
 
+  transition: ${({ theme }) => theme.colorChangeAnimation};
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.005);
+    box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.appBgColor60};
+    background: ${({ theme }) => theme.appBgColor60};
+  }
+
+  &:active {
+    transform: scale(1.005);
+    box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.appBgColor};
+    background: ${({ theme }) => theme.appBgColor70};
+  }
+
+  /* Условие для отключения стилей при disableParentActive */
+  ${({ disableActive, theme }) => disableActive && `
+      
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      background: ${theme.appBgColor50};
+    }
+
+    &:active {
+      transform: none;
+      box-shadow: none;
+      background: ${theme.appBgColor50};
+    }
+  `}
+
   p {
     margin: 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileScreen}) {
     margin: 10px 5px;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      background: ${({ theme }) => theme.appBgColor50};
+    }
+
+    &:active {
+      background: ${({ theme }) => theme.appBgColor70};
+      transform: scale(1.01);
+    }
   }
 `;
 
@@ -76,7 +118,7 @@ const ProductInfo = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 0 10px 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
 `;
 
@@ -87,48 +129,54 @@ const ProductComposition = styled.div`
   color: rgb(82, 82, 82);
 `;
 
-const ColorCircles = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-
-const ColorCircle = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${({ color }) => color};
-`;
-
 const ProductAviability = styled.div`
-  font-size: 15px;
+  font-size: 16px;
 `;
 
 /////////////////////////////////////////////////////////
+type Slide = {
+  id: number;
+  imageUrl: string;
+  title: string;
+  price: number;
+  composition: string;
+  thickness: string;
+  availability: number;
+  liked: boolean; 
+};
 
-const Product = ({ slide, onDiscount }: { slide: any; onDiscount: boolean }) => {
+type ProductProps = {
+  slide: Slide;
+  onDiscount: boolean;
+};
+
+const Product = ({ slide, onDiscount }: ProductProps) => {
+  const [disableParentActive, setDisableParentActive] = useState(false);
   return (
-    <ProductWrapper>
+    <ProductWrapper disableActive={disableParentActive}>
       <ProductCardImage
-        imglink={slide.imglink}
+        id={slide.id}
+        imageUrl={slide.imageUrl}
         title={slide.title}
         onDiscount={onDiscount}
+        setDisableParentActive={setDisableParentActive}
       />
       <ProductHeader>
         <ProductHeaderPrice onDiscount={onDiscount}>
-          <p>{slide.price}</p>
+          <p>{slide.price}€</p>
           {onDiscount && <DiscountPrice>40€</DiscountPrice>}
         </ProductHeaderPrice>
         <ProductHeaderWeight>100g</ProductHeaderWeight>
       </ProductHeader>
       <ProductInfo>
         <ProductComposition>
-          <p> Шерсть, Меринос</p>
-          <p> Толстая 600м</p>
+          <p>{slide.composition}</p>
+          <p>{slide.thickness}</p>
           <p>Подробнее...</p>
         </ProductComposition>
 
         <ProductAviability>
-          <p>На складе: 999г</p>
+          <p>На складе: {slide.availability}г</p>
         </ProductAviability>
       </ProductInfo>
     </ProductWrapper>

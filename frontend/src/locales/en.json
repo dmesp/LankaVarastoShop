@@ -16,10 +16,6 @@
           "options": ["Lace", "Fingering", "Sport", "Worsted", "Bulky"]
         },
         {
-          "title": "Purpose",
-          "options": ["Hand Knitting", "Machine Knitting", "Clothing", "Accessories"]
-        },
-        {
           "title": "Shade",
           "options": ["Solid", "Melange", "Gradient", "Sectional Dyeing"]
         },
@@ -29,7 +25,7 @@
         },
         {
           "title": "Seasonality",
-          "options": ["Winter", "Summer", "All-Season"]
+          "options": ["Winter", "Summer"]
         }
       ]
     }

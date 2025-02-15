@@ -13,11 +13,7 @@
         },
         {
           "title": "Langantiheys",
-          "options": ["Pitsilanka", "Ohut", "Keski", "Paksu", "Erittäin paksu"]
-        },
-        {
-          "title": "Käyttötarkoitus",
-          "options": ["Käsineulonta", "Koneellinen neulonta", "Vaatteet", "Asusteet"]
+          "options": ["Pitsilanka", "Ohut", "Keski", "Paksu"]
         },
         {
           "title": "Sävy",
@@ -29,7 +25,7 @@
         },
         {
           "title": "Kausittaisuus",
-          "options": ["Talvi", "Kesä", "Kauden mukainen"]
+          "options": ["Talvi", "Kesä"]
         }
       ]
     }

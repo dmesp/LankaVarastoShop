@@ -9,10 +9,6 @@ export const Icon = styled.span`
     'opsz' 48;
   font-size: 30px;
   cursor: pointer;
-
-  &:active {
-    color: red;
-  }
 `;
 
 export const IconText = styled.div`
@@ -23,4 +19,13 @@ export const CombinedIcon = styled.span`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: ${({ theme }) => theme.colorChangeAnimation};
+
+  &:hover {
+    color: red;
+  }
+
+  &:active {
+    color: green;
+  }
 `;

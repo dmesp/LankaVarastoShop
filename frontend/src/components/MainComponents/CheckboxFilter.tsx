@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-// Типизация данных из контекста переводов
 interface FilterCategory {
   title: string;
   options: string[];
@@ -16,37 +15,45 @@ interface Translations {
   };
 }
 
-// Styled Components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  min-width: 200px;
   padding: 20px;
   border-radius: 30px;
-  gap: 25px;
-  border: solid 2px;
+  gap: 30px;
 
-  border-color: ${({ theme }) => theme.appBgColor};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.wideScreen}) {
+    max-height: fit-content;
+    border: solid 2px;
+    border-color: ${({ theme }) => theme.appBgColor};
     border-radius:  0px 30px 30px 0px;
     gap: 40px;
     padding: 30px;
     border-left: none;
+    
+    label {
+      font-size: 18px;
+    }
+    
+    div {
+      font-size: 20px;
+    }
   }
 `;
 
 const Category = styled.div``;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
-  color: ${({ theme }) => theme.textPrimary || "black"};
+  color: ${({ theme }) => theme.textPrimary};
 `;
 
 const Options = styled.div`
   margin-left: 10px;
-
 `;
 
 const Label = styled.label`
@@ -54,7 +61,7 @@ const Label = styled.label`
   align-items: center;
   cursor: pointer;
   gap: 8px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 300;
   margin-top: 10px;
   user-select: none;
@@ -98,9 +105,9 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
   width: 100%;
-  height: 40px;
+  height: 50px;
   border-radius: 15px;
 
   border-color: ${({ theme }) => theme.appBgColor};
@@ -111,14 +118,10 @@ const SubmitButton = styled.button`
   }
 `;
 
-// Компонент
 const CheckboxFilter: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-
-  // Подключение переводов через контекст
   const { translations } = useLanguage() as { translations: Translations };
 
-  // Обработчик выбора чекбоксов
   const handleCheckboxChange = (option: string) => {
     setSelectedFilters((prev) => {
       const isSelected = prev.includes(option);

@@ -1,9 +1,13 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
+type Language = 'EN' | 'FI';
+
+type Translations = Record<Language, Record<string, string>>;
+
 type LanguageContextType = {
-  language: string;
-  translations: any;
-  changeLanguage: (language: string) => void;
+  language: Language;
+  translations: Record<string, string>;
+  changeLanguage: (language: Language) => void;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -12,26 +16,26 @@ type LanguageProviderProps = {
   children: ReactNode;
 };
 
-const translations = {
+const translations: Translations = {
   EN: require('../locales/en.json'),
   FI: require('../locales/fi.json'),
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState('EN');
-  const [translationsData, setTranslationsData] = useState(translations[language]);
+  const [language, setLanguage] = useState<Language>(() => {
+    return (localStorage.getItem('language') as Language) || 'EN';
+  });
 
   useEffect(() => {
-    setTranslationsData(translations[language]);
     localStorage.setItem('language', language);
   }, [language]);
 
-  const changeLanguage = (language: string) => {
-    setLanguage(language);
+  const changeLanguage = (newLanguage: Language) => {
+    setLanguage(newLanguage);
   };
 
   return (
-    <LanguageContext.Provider value={{ language, translations: translationsData, changeLanguage }}>
+    <LanguageContext.Provider value={{ language, translations: translations[language], changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

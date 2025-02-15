@@ -12,7 +12,7 @@ const FooterWrapper = styled.div`
   background-color: #f8f9fa;
   position: sticky;
   bottom: 0;
-  width: 100%;
+
   box-sizing: border-box;
   border-radius: 20px 20px 0px 0px;
   z-index: 10; /* Обеспечивает, что футер будет поверх всех элементов */
