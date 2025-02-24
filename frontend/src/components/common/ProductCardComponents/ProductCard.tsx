@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import ProductCardImage from './ProductCardImage';
 
@@ -13,8 +13,7 @@ const ProductWrapper = styled.div<{ disableActive: boolean }>`
   background: ${({ theme }) => theme.appBgColor50};
   border-radius: 30px;
 
-  transition: ${({ theme }) => theme.colorChangeAnimation};
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background 0.05s ease-in-out, box-shadow 0.2s ease-in-out;
 
   &:hover {
     transform: scale(1.005);
@@ -30,17 +29,18 @@ const ProductWrapper = styled.div<{ disableActive: boolean }>`
 
   /* Условие для отключения стилей при disableParentActive */
   ${({ disableActive, theme }) => disableActive && `
-      
-    &:hover {
+    &:hover, &:active {
       transform: none;
       box-shadow: none;
       background: ${theme.appBgColor50};
     }
 
-    &:active {
-      transform: none;
-      box-shadow: none;
-      background: ${theme.appBgColor50};
+    @media (max-width: ${theme.breakpoints.mobileScreen}) {
+      &:hover, &:active {
+        transform: none;
+        box-shadow: none;
+        background: ${theme.appBgColor50};
+      }
     }
   `}
 
@@ -58,6 +58,7 @@ const ProductWrapper = styled.div<{ disableActive: boolean }>`
     }
 
     &:active {
+      box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.appBgColor};
       background: ${({ theme }) => theme.appBgColor70};
       transform: scale(1.01);
     }
@@ -150,8 +151,9 @@ type ProductProps = {
   onDiscount: boolean;
 };
 
-const Product = ({ slide, onDiscount }: ProductProps) => {
+const Product = (({ slide, onDiscount }: ProductProps) => {
   const [disableParentActive, setDisableParentActive] = useState(false);
+  console.log('Родитель ререндерится');
   return (
     <ProductWrapper disableActive={disableParentActive}>
       <ProductCardImage
@@ -181,6 +183,6 @@ const Product = ({ slide, onDiscount }: ProductProps) => {
       </ProductInfo>
     </ProductWrapper>
   );
-};
+});
 
 export default Product;

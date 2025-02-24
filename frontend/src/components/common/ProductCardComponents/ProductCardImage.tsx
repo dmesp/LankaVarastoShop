@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useLikeToggle } from "@/hooks/useLikeToggler"; // Импортируем хук
 
@@ -101,7 +101,7 @@ type ProductImageWrapperProps = {
 
 const ProductCardImage = ({ id, title, imageUrl, onDiscount, setDisableParentActive }: ProductImageWrapperProps) => {
   const { likedProducts, handleLikeToggle } = useLikeToggle();
-  console.log(likedProducts)
+  console.log('Ререндер');
   return (
     <ProductImageWrapper>
       <ProductImage src={imageUrl} alt={title} />
@@ -110,6 +110,8 @@ const ProductCardImage = ({ id, title, imageUrl, onDiscount, setDisableParentAct
         onClick={() => handleLikeToggle(id)}
         onMouseEnter={() => setDisableParentActive(true)}
         onMouseLeave={() => setDisableParentActive(false)}
+        onTouchStart={() => setDisableParentActive(true)}
+        onTouchEnd={() => setDisableParentActive(false)}
         >
         {likedProducts.includes(id) ? (
           <ActiveHeartIcon>favorite</ActiveHeartIcon>

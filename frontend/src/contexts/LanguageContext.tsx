@@ -22,9 +22,14 @@ const translations: Translations = {
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    return (localStorage.getItem('language') as Language) || 'EN';
-  });
+  const [language, setLanguage] = useState<Language>('EN');
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      setLanguage(savedLanguage as Language);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('language', language);

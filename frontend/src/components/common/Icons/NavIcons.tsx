@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Icon, IconText, CombinedIcon } from'./IconStyles';
-import CheckboxFilter from '@/components/MainComponents/CheckboxFilter';
+import CheckboxFilter from '@/components/MainComponents/Popups/CheckboxFilter';
 import useOutsideClick from '@/hooks/useOutsideClick'; 
 
 const HideOnWideScreen = styled.div`
@@ -10,104 +10,101 @@ const HideOnWideScreen = styled.div`
   }
 `;
 
-const Popup = styled.div< {isVisible : boolean} >`
+const Popup = styled.div<{ isVisible: boolean }>`
   position: absolute;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 1);
   z-index: 10;
   background: white;
-
   border-radius: 30px;
-
   overflow-y: auto;
   border: 2px solid ${({ theme }) => theme.appBgColor};
   transition: ${({ theme }) => theme.popupWindowAnimation};
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.wideScreen}) {
-    top: 100%;
-  }
+  top: 85px; /* Places it below the icon */
+  transform: translateX(20%);
+
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileScreen}) {
-    bottom: 100%;
+    top: -75vh; 
+    bottom: 100%; /* Places it above the icon */
+    transform: translateY(-10px); /* Optional: adjust based on how far above the icon you want */
   }
 `;
 
 const FiltersPopup = styled(Popup)`
-  transform: translateX(-20%);
-  width: 300px;  
-  height: 75vh;  
+  width: 300px;
+  height: 75vh;
 `;
 
 const LikesPopup = styled(Popup)`
-  transform: translateX(-0%);
-  width: 90vw;
-  height: 80vh;  
+  min-width: 30vw;
+  width: fit-content;
+  max-width: 50vw;
+  height: 70vh;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileScreen}) {
+    min-width: 95vw;
+    width: 95vw;
+    height: 75vh;
+  }
 `;
 
-type PopupsState = {
-  isFiltersPopupVisible: boolean;
-  isLikedPopupVisible: boolean;
-};
 
 
+const Icons = () => {
+  const [isFiltersPopupVisible, setIsFiltersPopupVisible] = useState(false);
+  const [isLikedPopupVisible, setIsLikedPopupVisible] = useState(false);
 
-const Icons: React.FC = () => {
-  const [popupsState, setPopupsState] = useState<PopupsState>({
-    isFiltersPopupVisible: false,
-    isLikedPopupVisible: false
-  });
-  
-  const menuRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(menuRef, () => {
-    setPopupsState((prevState) => ({
-      ...prevState,
-      isFiltersPopupVisible: false,
-      isLikedPopupVisible: false,
-    }));
-  });
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const likedRef = useRef<HTMLDivElement>(null);
+  const filtersIconRef = useRef<HTMLDivElement>(null); // Новый ref для фильтров
+  const likedIconRef = useRef<HTMLDivElement>(null); 
 
-  const togglePopup = (popup: 'isFiltersPopupVisible' | 'isLikedPopupVisible') => {
-    setPopupsState((prevState) => 
-      Object.fromEntries(
-        Object.keys(prevState).map((key) => [key, key === popup ? !prevState[popup] : false])
-      ) as PopupsState
-    );
-    
+  useOutsideClick(filtersRef, () => setIsFiltersPopupVisible(false), filtersIconRef);
+  useOutsideClick(likedRef, () => setIsLikedPopupVisible(false), likedIconRef);
+
+  const openPopup = (popup: 'filters' | 'liked') => {
+    if (popup === 'filters' ) {
+      setIsFiltersPopupVisible(prev => !prev);
+    } else if (popup === 'liked' ) {
+      setIsLikedPopupVisible(prev => !prev);
+    }
   };
 
   useEffect(() => {
-    const isAnyPopupOpen = Object.values(popupsState).some((state) => state);
-    document.body.style.overflow = isAnyPopupOpen ? 'hidden' : '';
+    const isAnyPopupOpen = isFiltersPopupVisible || isLikedPopupVisible;
+    document.body.style.overflow = isAnyPopupOpen ? 'hidden' : ''; 
     return () => {
       document.body.style.overflow = ''; 
     };
-  }, [popupsState]);
-  
+  }, [isFiltersPopupVisible, isLikedPopupVisible]);
+
   return (
     <>
-      <HideOnWideScreen ref={menuRef}>
-        <CombinedIcon onClick={() => togglePopup('isFiltersPopupVisible')}>
+      <HideOnWideScreen>
+        <CombinedIcon ref={filtersIconRef} onClick={() => openPopup('filters')}>
           <Icon>menu</Icon>
           <IconText>Menu</IconText>
         </CombinedIcon>
-        <FiltersPopup isVisible={popupsState.isFiltersPopupVisible}>
-          <CheckboxFilter />
-        </FiltersPopup>
       </HideOnWideScreen>
+      <FiltersPopup ref={filtersRef} isVisible={isFiltersPopupVisible}>
+        <CheckboxFilter />
+      </FiltersPopup>
 
-      <CombinedIcon onClick={() => togglePopup('isLikedPopupVisible')}>
+      <CombinedIcon ref={likedIconRef} onClick={() => openPopup('liked')}>
         <Icon>favorite</Icon>
         <IconText>Liked</IconText>
       </CombinedIcon>
-      <LikesPopup isVisible={popupsState.isLikedPopupVisible}>
-
-      </LikesPopup>
+      <LikesPopup ref={likedRef} isVisible={isLikedPopupVisible} />
+        <LikedList />
       <CombinedIcon>
         <Icon>shopping_cart</Icon>
-        <IconText>Cart</IconText>
+        <IconText>Liked</IconText>
       </CombinedIcon>
     </>
+    
   );
 };
 

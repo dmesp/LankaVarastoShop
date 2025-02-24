@@ -4,7 +4,7 @@ import styled from "styled-components";
 import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
-import CheckboxFilter from './CheckboxFilter'; 
+import CheckboxFilter from './Popups/CheckboxFilter'; 
 
 const StyledWelcome = styled.div`
   display: flex;
