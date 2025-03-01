@@ -16,6 +16,7 @@ const StyledWelcome = styled.div`
 const MainPage = styled.div`
   height: fit-content;
   display: grid;
+  row-gap: 30px;
   grid-template-columns: 400px 1fr 1fr; 
   grid-template-rows: auto auto auto;
   grid-template-areas: 
@@ -36,14 +37,14 @@ const BannerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+
 `;
 
 const ProductsSliders = styled.div`
   grid-area: slider;
   display: flex;
   flex-direction: column;
-  column-gap: 40px;
+  row-gap: 30px;
 
 `;
 

@@ -74,32 +74,29 @@ const Arrow = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  padding-right: 30px;
 
   color: ${({ theme }) => theme.appTextColor}; 
+
   cursor: pointer;
   transition: color 0.2s;
 
-  
-  &:active {
+  &:active, &:hover {
     color: ${({ theme }) => theme.appBgColor}; 
   }
 `;
 
 const LeftArrow = styled(Arrow)`
-
+  padding-right: 20px;
 `;
 
 const RightArrow = styled(Arrow)`
-
+  padding-left: 20px;
 `;
 
 const CarouselWrapper = styled.div`
-  padding-left: 5px;
-
+  padding-left: 10px;
+  padding-bottom: 0px;
 `;
 
 const CarouselHeaderWrapper = styled.div`
@@ -107,9 +104,12 @@ const CarouselHeaderWrapper = styled.div`
   align-items: flex-end;
   gap: 50px;
   font-size: 30px;
+  padding-bottom: 10px;
+  
   @media (max-width: 830px) {
     justify-content: space-between;
     margin-left: 5px;
+    padding-bottom: 0px;
   }
 `;
 
@@ -119,11 +119,10 @@ const HeaderText = styled.div`
 `;
 
 const ArrowWrapper = styled.div`
+  margin-right: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
-  gap: 20px;
 `;
 
 const slidesData = [

@@ -87,16 +87,16 @@ const Arrow = styled.div`
 `;
 
 const LeftArrow = styled(Arrow)`
-
+  padding-right: 20px;
 `;
 
 const RightArrow = styled(Arrow)`
-
+  padding-left: 20px;
 `;
 
 const CarouselWrapper = styled.div`
-
-  padding-left: 5px;
+  padding-left: 10px;
+  padding-bottom: 0px;
 `;
 
 const CarouselHeaderWrapper = styled.div`
@@ -104,10 +104,12 @@ const CarouselHeaderWrapper = styled.div`
   align-items: flex-end;
   gap: 50px;
   font-size: 30px;
-
+  padding-bottom: 10px;
+  
   @media (max-width: 830px) {
     justify-content: space-between;
     margin-left: 5px;
+    padding-bottom: 0px;
   }
 `;
 

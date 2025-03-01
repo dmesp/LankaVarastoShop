@@ -6,8 +6,8 @@ const ProductWrapper = styled.div<{ disableActive: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 300px;
-  margin: 10px 15px;
+ 
+  margin: 0px 10px;
   margin-left: 0px;
   padding: 10px;
   background: ${({ theme }) => theme.appBgColor50};
@@ -153,7 +153,6 @@ type ProductProps = {
 
 const Product = (({ slide, onDiscount }: ProductProps) => {
   const [disableParentActive, setDisableParentActive] = useState(false);
-  console.log('Родитель ререндерится');
   return (
     <ProductWrapper disableActive={disableParentActive}>
       <ProductCardImage
