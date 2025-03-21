@@ -93,20 +93,20 @@ const DiscountPercent = styled.div`
 
 type ProductImageWrapperProps = {
   id: number;
-  title: string;
+  name: string;
   imageUrl: string;
   onDiscount: boolean;
+  isHeartVisible: boolean;
   setDisableParentActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProductCardImage = ({ id, title, imageUrl, onDiscount, setDisableParentActive }: ProductImageWrapperProps) => {
+const ProductCardImage = ({ id, name, imageUrl, onDiscount, isHeartVisible, setDisableParentActive }: ProductImageWrapperProps) => {
   const { likedProducts, handleLikeToggle } = useLikeToggle();
-  console.log('Ререндер');
   return (
     <ProductImageWrapper>
-      <ProductImage src={imageUrl} alt={title} />
+      <ProductImage src={imageUrl} alt={name} />
       {onDiscount && <DiscountPercent>-20%</DiscountPercent>}
-      <HeartIconContainer 
+      {isHeartVisible && <HeartIconContainer 
         onClick={() => handleLikeToggle(id)}
         onMouseEnter={() => setDisableParentActive(true)}
         onMouseLeave={() => setDisableParentActive(false)}
@@ -119,6 +119,7 @@ const ProductCardImage = ({ id, title, imageUrl, onDiscount, setDisableParentAct
           <HeartIcon>favorite</HeartIcon>
         )}
       </HeartIconContainer>
+      }
     </ProductImageWrapper>
   );
 };

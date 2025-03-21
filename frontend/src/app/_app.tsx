@@ -3,9 +3,9 @@
 
 import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from '../styles/globalstyle';
-import { LanguageProvider } from '../contexts/LanguageContext';
-import { themes, ThemeNames } from '../styles/themes';
+import { GlobalStyles } from '@/styles/globalstyle';
+import { themes, ThemeNames } from '@/styles/themes';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import StyledApp from '@/components/StyledApp'; 
 
 
@@ -13,45 +13,40 @@ const App = () => {
   const [theme, setTheme] = useState(themes[ThemeNames.LIGHT]);
 
   const changeThemeColor = (color: string) => {
-    console.log("ывфывфы")
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', color);
     }
   };
   
-    useEffect(() => {
-      // Здесь выполняется логика выбора темы по умолчанию на основе предпочтений пользователя
-      const getUserTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
+  useEffect(() => {
+    const getUserTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? ThemeNames.DARK
+      : ThemeNames.LIGHT;
   
-      if (getUserTheme === 'light') {
-        setTheme(themes[ThemeNames.LIGHT]);
-      } else if (getUserTheme === 'dark') {
-        setTheme(themes[ThemeNames.DARK]);
-      } else {
-        setTheme(themes[ThemeNames.LIGHT]);
-      }
-
-			changeThemeColor(theme.appBgColor);
-
-    }, []);
+    setTheme(themes[getUserTheme]);
+  }, []);
   
-    const themeToggler = (selectedTheme: ThemeNames) => {
-      setTheme(themes[selectedTheme]);
-    };
+  useEffect(() => {
+    if (theme) {
+      changeThemeColor(theme.appBgColor);
+    }
+  }, [theme]);
   
-    return (
-      <>
-          <ThemeProvider theme={theme}>
-            <LanguageProvider>
-              <GlobalStyles />
-              <StyledApp themeToggler={themeToggler} />
-            </LanguageProvider>
-          </ThemeProvider>
-      </>
-    );
+  const themeToggler = (selectedTheme: ThemeNames) => {
+    setTheme(themes[selectedTheme]);
   };
   
-  export default App;
+  return (
+    <>
+        <ThemeProvider theme={theme}>
+          <LanguageProvider>
+            <GlobalStyles />
+            <StyledApp themeToggler={themeToggler} />
+          </LanguageProvider>
+        </ThemeProvider>
+    </>
+  );
+};
+
+export default App;

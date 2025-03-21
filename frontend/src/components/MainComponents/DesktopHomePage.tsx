@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
+import CategoriesSlider from "./Carousels/CategoriesSlider"
 import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
@@ -45,10 +46,39 @@ const ProductsSliders = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 30px;
-
 `;
 
 const DesktopHomePage = () => {
+  const productData = {
+      data: [
+        {
+          attributes: {
+            name: "lanka1211211",
+            price: 20,
+            color: "Red",
+            desc: {
+              en: "some text some text some text some text ",
+              fi: "some text some text some text some text "
+            },
+            comp: {
+              en: "Akryyli 50\nPuuvilla 50",
+              fi: "Acrylic 50\nCotton 50"
+            }
+          }
+        }
+      ]  
+  };
+  
+  fetch("http://localhost:1337/api/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(productData),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
   return (
     <StyledWelcome>
       <MainPage>
@@ -59,6 +89,7 @@ const DesktopHomePage = () => {
           <BannerSlider />
         </BannerWrapper>
         <ProductsSliders>
+          <CategoriesSlider />
           <PopoularSlider />
           <DiscountSlider />
         </ProductsSliders>

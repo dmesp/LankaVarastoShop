@@ -23,15 +23,14 @@ const Popup = styled.div<{ isVisible: boolean }>`
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
 
-  top: 85px; /* Places it below the icon */
+  top: 85px; 
   transform: translateX(20%);
 
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileScreen}) {
     top: -78vh; 
     bottom: 100%; /* Places it above the icon */
-    transform: translateY(-10px); /* Optional: adjust based on how far above the icon you want */
-  }
+    transform: translateY(-10px);
 `;
 
 const FiltersPopup = styled(Popup)`
@@ -93,7 +92,7 @@ const Icons = () => {
 
   const filtersRef = useRef<HTMLDivElement>(null);
   const likedRef = useRef<HTMLDivElement>(null);
-  const filtersIconRef = useRef<HTMLDivElement>(null); // Новый ref для фильтров
+  const filtersIconRef = useRef<HTMLDivElement>(null);
   const likedIconRef = useRef<HTMLDivElement>(null); 
 
   useOutsideClick(filtersRef, () => setIsFiltersPopupVisible(false), filtersIconRef);

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
+import CategoriesSlider from "./Carousels/CategoriesSlider"
 import BannerSlider from './Carousels/BannerSlider';
 import PopoularSlider from './Carousels/PopoularSlider';
 import DiscountSlider from './Carousels/DiscountSlider';
@@ -30,7 +31,7 @@ const ProductsSliders = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-
+  margin-left: 5px;
 `;
 
 const MobileHomePage = () => {
@@ -41,6 +42,7 @@ const MobileHomePage = () => {
           <BannerSlider />
         </BannerWrapper>
         <ProductsSliders>
+          <CategoriesSlider />
           <PopoularSlider />
           <DiscountSlider />
         </ProductsSliders>

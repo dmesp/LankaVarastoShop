@@ -8,7 +8,6 @@ export const GlobalStyles = createGlobalStyle`
    }
 
   body {
-    color: ${({ theme }) => theme.appTextColor};
 		height: 100vh;
     margin: 0px;
     padding: 0px;
@@ -27,8 +26,12 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 18px;
   }
 
-   h1 {
+  h1 {
     font-weight: 400;    
+  }
+
+  p {
+    margin: 0;
   }
 
    .bigger-text {
@@ -56,5 +59,4 @@ export const GlobalStyles = createGlobalStyle`
     .playwrite-font {
         font-family: "Updock", serif;
     }
- 
 `; 

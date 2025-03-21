@@ -149,17 +149,19 @@ type Slide = {
 type ProductProps = {
   slide: Slide;
   onDiscount: boolean;
+  isHeartVisible: boolean;
 };
 
-const Product = (({ slide, onDiscount }: ProductProps) => {
+const Product = (({ slide, onDiscount, isHeartVisible}: ProductProps) => {
   const [disableParentActive, setDisableParentActive] = useState(false);
   return (
     <ProductWrapper disableActive={disableParentActive}>
       <ProductCardImage
         id={slide.id}
         imageUrl={slide.imageUrl}
-        title={slide.title}
+        name={slide.title}
         onDiscount={onDiscount}
+        isHeartVisible={isHeartVisible}
         setDisableParentActive={setDisableParentActive}
       />
       <ProductHeader>
