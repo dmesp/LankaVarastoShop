@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_quantity_quantities",
+  "info": {
+    "displayName": "quantity",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "quantity": {
+      "type": "integer"
+    }
+  }
+}
